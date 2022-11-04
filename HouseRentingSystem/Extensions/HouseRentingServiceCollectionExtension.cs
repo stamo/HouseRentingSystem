@@ -10,6 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IHouseService, HouseService>();
+            services.AddScoped<IAgentService, AgentService>();
 
             return services;
         }

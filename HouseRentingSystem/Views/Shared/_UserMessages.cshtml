@@ -1,0 +1,22 @@
+﻿@using HouseRentingSystem.Core.Constants
+
+@if (TempData[MessageConstant.ErrorMessage] != null)
+{
+    <script>
+        $(function () { toastr.error('@TempData[MessageConstant.ErrorMessage].ToString()'); });
+    </script>
+}
+
+@if (TempData[MessageConstant.WarningMessage] != null)
+{
+    <script>
+        $(function () { toastr.warning('@TempData[MessageConstant.WarningMessage].ToString()'); });
+    </script>
+}
+
+@if (TempData[MessageConstant.SuccessMessage] != null)
+{
+    <script>
+        $(function () { toastr.success('@TempData[MessageConstant.SuccessMessage].ToString()'); });
+    </script>
+}
