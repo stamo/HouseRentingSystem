@@ -36,6 +36,21 @@ namespace HouseRentingSystem.Core.Services
                         EF.Functions.Like(h.Description.ToLower(), searchTerm));
             }
 
+            //switch (sorting)
+            //{
+            //    case HouseSorting.Price:
+            //        houses = houses
+            //        .OrderBy(h => h.PricePerMonth);
+            //        break;
+            //    case HouseSorting.NotRentedFirst:
+            //        houses = houses
+            //        .OrderBy(h => h.RenterId);
+            //        break;
+            //    default:
+            //        houses = houses.OrderByDescending(h => h.Id);
+            //        break;
+            //}
+
             houses = sorting switch
             {
                 HouseSorting.Price => houses
