@@ -22,6 +22,7 @@ namespace HouseRentingSystem.Controllers
             agentService = _agentService;
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery]AllHousesQueryModel query)
         {
