@@ -4,6 +4,8 @@ namespace HouseRentingSystem.Core.Models.House
 {
     public class HouseModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(50, MinimumLength = 10)]
         public string Title { get; set; } = null!;
