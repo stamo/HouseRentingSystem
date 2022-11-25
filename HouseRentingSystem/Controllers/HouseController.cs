@@ -4,6 +4,7 @@ using HouseRentingSystem.Extensions;
 using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HouseRentingSystem.Core.Extensions;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -63,7 +64,7 @@ namespace HouseRentingSystem.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if ((await houseService.Exists(id)) == false)
             {
@@ -71,6 +72,13 @@ namespace HouseRentingSystem.Controllers
             }
 
             var model = await houseService.HouseDetailsById(id);
+
+            if (information != model.GetInformation())
+            {
+                TempData["ErrorMessage"] = "Don't touch my slug!";
+
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(model);
         }
@@ -115,7 +123,7 @@ namespace HouseRentingSystem.Controllers
 
             int id = await houseService.Create(model, agentId);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { id = id, information = model.GetInformation()  });
         }
 
         [HttpGet]
@@ -189,7 +197,7 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.Edit(model.Id, model);
 
-            return RedirectToAction(nameof(Details), new { model.Id });
+            return RedirectToAction(nameof(Details), new { id = model.Id, information = model.GetInformation() });
         }
 
         [HttpGet]
