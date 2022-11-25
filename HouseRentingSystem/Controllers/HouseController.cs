@@ -14,12 +14,16 @@ namespace HouseRentingSystem.Controllers
 
         private readonly IAgentService agentService;
 
+        private readonly ILogger logger;
+
         public HouseController(
             IHouseService _houseService,
-            IAgentService _agentService)
+            IAgentService _agentService,
+            ILogger<HouseController> _logger)
         {
             houseService = _houseService;
             agentService = _agentService;
+            logger = _logger;
         }
 
         [HttpGet]
@@ -124,6 +128,8 @@ namespace HouseRentingSystem.Controllers
 
             if ((await houseService.HasAgentWithId(id, User.Id())) == false)
             {
+                logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
