@@ -17,7 +17,7 @@
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
                 <a asp-controller="House" asp-action="Add" class="btn btn-primary btn-lg"
-                    role="button">Add House</a>
+           role="button">Add House</a>
             }
         </p>
     </div>
@@ -30,13 +30,13 @@
         @foreach (var house in Model)
         {
             <div class="carousel-item @(first ? "active" : string.Empty)">
-                
+
                 <img class="d-block w-100" style="height:500px"
-                    src="@house.ImageUrl" alt="@house.Title">
+                 src="@house.ImageUrl" alt="@house.Title">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
                         <a class="btn btn-primary" asp-controller="House" asp-action="Details"
-                            asp-route-id="@house.Id"> @house.Title</a>
+                       asp-route-id="@house.Id"> @house.Title</a>
                     </h5>
                 </div>
             </div>
@@ -53,3 +53,25 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<div class="mb-5"></div>
+<div class="row">
+    <div class="col-12 text-center">
+    </div>
+</div>
+<button class="btn btn-primary" id="statistics-button">Show Statistics</button>
+<div class="mt-4 p-5 bg-light d-none" id="statistics">
+    <h2 class="col-md-6 text-center" id="total-houses"></h2>
+    <h2 class="col-md-6 text-center" id="total-rents"></h2>
+</div>
+@section Scripts {
+    <script>
+        $('#statistics-button').on('click', ev => {
+            $.get('https://localhost:7035/api/statistics', (data) => {
+                $('#total-houses').text(data.totalHouses + "Houses");
+                $('#total-rents').text(data.totalRents + " Rents");
+                $('#statistics').removeClass('d-none');
+                $('#statistics-button').hide();
+            });
+        });
+    </script>
+}
