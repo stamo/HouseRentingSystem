@@ -7,5 +7,7 @@ namespace HouseRentingSystem.Infrastructure.Data
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

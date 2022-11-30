@@ -14,6 +14,7 @@
             <th><label>Full Name</label></th>
             <th><label>Phone Number</label></th>
             <th><label>User Is Agent</label></th>
+            <th><label>Actions</label></th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,12 @@
                     {
                         <label class="text-center">❌</label>
                     }
+                </td>
+                <td>
+                    <form asp-area="Admin" asp-controller="User" asp-action="Forget" method="post">
+                        <input type="hidden" value="@user.UserId">
+                        <button type="submit" class="btn btn-danger">Forget</button>
+                    </form>
                 </td>
             </tr>
         }
