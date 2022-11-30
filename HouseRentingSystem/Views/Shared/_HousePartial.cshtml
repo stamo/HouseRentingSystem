@@ -12,25 +12,25 @@
             </h6>
             <h6>(@(Model.IsRented ? "Rented" : "Not Rented"))</h6>
             <br />
-            <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id" 
+            <a asp-area="" asp-controller="House" asp-action="Details" asp-route-id="@Model.Id" 
             asp-route-information="@Model.GetInformation()" class="btn btn-success">Details</a>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-warning">Edit</a>
-                <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 <p></p>
                 @if (!Model.IsRented)
                 {
-                    <form class="input-group-sm" asp-controller="House"
+                    <form class="input-group-sm" asp-area="" asp-controller="House"
                   asp-action="Rent" asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Rent" />
                     </form>
                 }
                 else
                 {
-                    <form asp-controller="House" asp-action="Leave"
+                    <form asp-area="" asp-controller="House" asp-action="Leave"
                   asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Leave" />
                     </form>

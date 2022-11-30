@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="wwwroot\lib\toastr\" />
   </ItemGroup>

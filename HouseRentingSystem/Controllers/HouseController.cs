@@ -5,6 +5,7 @@ using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HouseRentingSystem.Core.Extensions;
+using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -47,6 +48,11 @@ namespace HouseRentingSystem.Controllers
 
         public async Task<IActionResult> Mine()
         {
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Mine", "House", new { area = AreaName });
+            }
+
             IEnumerable<HouseServiceModel> myHhouses;
             var userId = User.Id();
 
@@ -251,7 +257,7 @@ namespace HouseRentingSystem.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (await agentService.ExistsById(User.Id()))
+            if (!User.IsInRole(AdminRolleName) && await agentService.ExistsById(User.Id()))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }

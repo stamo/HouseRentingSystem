@@ -1,0 +1,36 @@
+﻿ @model MyHousesViewModel
+
+@{
+    ViewBag.Title = "My Houses";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<h4>My Added Houses</h4>
+
+@if (!Model.AddedHouses.Any())
+{
+    <h2 class="text-center">You have no added houses yet!</h2>
+}
+
+<div class="row">
+    @foreach (var house in Model.AddedHouses)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_HousePartial.cshtml", house)
+    }
+</div>
+
+<h4>My Rented Houses</h4>
+
+@if (!Model.RentedHouses.Any())
+{
+    <h2 class="text-center">You have no rented houses yet!</h2>
+}
+
+<div class="row">
+    @foreach (var house in Model.RentedHouses)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_HousePartial.cshtml", house)
+    }
+</div>
