@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace HouseRentingSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(AreaName)]
     [Route("Admin/[controller]/[Action]/{id?}")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = AdminRolleName)]
 
     public class BaseController : Controller
     {
