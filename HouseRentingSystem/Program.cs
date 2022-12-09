@@ -28,7 +28,6 @@ builder.Services.AddControllersWithViews()
     });
 builder.Services.AddApplicationServices();
 builder.Services.AddResponseCaching();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -1,4 +1,6 @@
 ﻿using HouseRentingSystem.Core.Models.Admin;
+using HouseRentingSystem.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace HouseRentingSystem.Core.Contracts.Admin
 {
@@ -7,5 +9,7 @@ namespace HouseRentingSystem.Core.Contracts.Admin
         Task<string> UserFullName(string userId);
 
         Task<IEnumerable<UserServiceModel>> All();
+
+        Task<bool> Forget(string userId);
     }
 }

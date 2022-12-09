@@ -1,5 +1,6 @@
 ﻿using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Models;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
@@ -10,9 +11,14 @@ namespace HouseRentingSystem.Controllers
     {
         private readonly IHouseService houseService;
 
-        public HomeController(IHouseService _houseService)
+        private readonly ILogger logger;
+
+        public HomeController(
+            IHouseService _houseService,
+            ILogger<HomeController> _logger)
         {
             houseService = _houseService;
+            logger = _logger;
         }
 
         public async Task<IActionResult> Index()
@@ -30,6 +36,10 @@ namespace HouseRentingSystem.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            var feature = this.HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+            logger.LogError(feature.Error, "TraceIdentifier: {0}", Activity.Current?.Id ?? HttpContext.TraceIdentifier);
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

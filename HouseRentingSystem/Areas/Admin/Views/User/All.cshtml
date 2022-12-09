@@ -35,8 +35,7 @@
                     }
                 </td>
                 <td>
-                    <form asp-area="Admin" asp-controller="User" asp-action="Forget" method="post">
-                        <input type="hidden" value="@user.UserId">
+                    <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId"  method="post">
                         <button type="submit" class="btn btn-danger">Forget</button>
                     </form>
                 </td>
